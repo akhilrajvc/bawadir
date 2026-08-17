@@ -106,7 +106,7 @@ body{padding-top:var(--header-h)}
 .site-header .brand{position:absolute;left:0;top:0;width:305px;height:158px;display:grid;place-items:center;background:#050505;border-right:1px solid rgba(217,160,47,.75);border-bottom:1px solid rgba(217,160,47,.75);clip-path:polygon(0 0,100% 0,100% 82%,90% 100%,8% 100%,0 88%);z-index:3}
 .site-header .brand img{width:205px;height:150px;object-fit:contain}
 .site-header .nav{display:flex;align-items:center;gap:34px;color:#f7f7f5;text-transform:uppercase;font-size:14px;font-weight:700;letter-spacing:.01em}
-.site-header .nav>a{padding:10px 0!important;color:#f7f7f5;position:relative;white-space:nowrap}
+.site-header .nav>a{padding:10px 0;color:#f7f7f5;position:relative;white-space:nowrap}
 .site-header .nav>a:hover,.site-header .nav>a.active{color:var(--bawadir-gold-bright)}
 .site-header .nav>a.active:after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--bawadir-gold-bright)}
 .site-header .header-phone{display:flex;flex-direction:column;gap:2px;border-left:1px solid rgba(217,160,47,.65);padding-left:18px;line-height:1.15;margin-left:2px}
@@ -134,7 +134,7 @@ body.home-dark .hero-home-dark .hero-stats-card div{padding:0 15px}
 
 /* Make the same dark header feel natural on every inner page */
 body:not(.home-dark) .page-hero{padding-top:95px}
-body:not(.home-dark) .site-header .nav-cta{background:transparent!important}
+body:not(.home-dark) .site-header .nav-cta{background:transparent!important;padding:12px 24px !important}
 
 @media(max-width:1180px){
   .site-header .nav-wrap,body.home-dark .nav-wrap{padding-left:255px;padding-right:24px}
@@ -161,7 +161,7 @@ body:not(.home-dark) .site-header .nav-cta{background:transparent!important}
   body.home-dark .hero-home-dark .hero-content{width:calc(100% - 30px);height:auto;min-height:800px;padding:76px 0 15px;display:flex;flex-direction:column;align-items:stretch;gap:20px}
   body.home-dark .hero-home-dark .hero-main{padding:0;max-width:none}
   body.home-dark .hero-home-dark h1{font-size:clamp(40px,10vw,60px)}
-  body.home-dark .hero-home-dark .hero-trust{align-self:flex-start;margin:0;min-width:0}
+  body.home-dark .hero-home-dark .hero-trust{align-self:flex-start;margin:15% 0 0 0!important;width:100%}
   body.home-dark .hero-home-dark .hero-stats-card{grid-template-columns:repeat(2,1fr);width:100%;min-height:0;margin-top:auto;padding:15px 8px}
   body.home-dark .hero-home-dark .hero-stats-card div{padding:12px 6px}
 }
@@ -369,7 +369,7 @@ body:not(.home-dark) .site-header .nav-cta{background:transparent!important}
   /* The generated reference scene is 1536x683. Keep its full frame visible. */
   body.home-dark .hero-home-dark{height:850px!important;min-height:850px!important;overflow:visible!important;background:#050505!important}
   body.home-dark .hero-home-dark .hero-media{
-    inset:0 0 auto 0!important;height:683px!important;
+    inset:0 0 auto 0!important;height:660px!important;
     background-image:url('assets/hero-reference.jpg')!important;
     background-size:100% 683px!important;background-position:center top!important;background-repeat:no-repeat!important;
   }
@@ -378,7 +378,7 @@ body:not(.home-dark) .site-header .nav-cta{background:transparent!important}
     padding:82px 0 0!important;display:grid!important;grid-template-columns:minmax(0,1fr) 330px!important;
     grid-template-rows:1fr auto!important;align-items:center!important;gap:10px 30px!important;
   }
-  body.home-dark .hero-home-dark .hero-main{max-width:720px!important;align-self:center!important;padding-bottom:24px!important}
+  body.home-dark .hero-home-dark .hero-main{max-width:720px!important;align-self:center!important;padding-bottom:2px!important}
   body.home-dark .hero-home-dark .hero-trust{align-self:end!important;margin:0 0 16px!important}
   body.home-dark .hero-home-dark .hero-stats-card{
     grid-column:1/-1!important;align-self:end!important;width:100%!important;min-height:185px!important;
@@ -419,7 +419,7 @@ body:not(.home-dark) .site-header .nav-cta{background:transparent!important}
   body.home-dark .hero-home-dark .hero-media{
     background-image:
       linear-gradient(90deg,rgba(0,0,0,.54) 0%,rgba(0,0,0,.26) 34%,rgba(0,0,0,.08) 58%,rgba(0,0,0,0) 76%),
-      url('assets/hero-bawadir-wide.jpg')!important;
+      url('assets/bawadir-hero-final.png')!important;
     background-size:100% 100%!important;
     background-position:center top!important;
     background-repeat:no-repeat!important;
@@ -483,7 +483,7 @@ body.projects-page .footer{background:#030303}
   body.home-dark .hero-home-dark .hero-media{
     background-image:
       linear-gradient(90deg,rgba(0,0,0,.58) 0%,rgba(0,0,0,.25) 45%,rgba(0,0,0,.06) 72%,rgba(0,0,0,0) 100%),
-      url('assets/hero-bawadir-wide.jpg')!important;
+      url('assets/bawadir-hero-final.png')!important;
     background-size:auto 683px!important;
     background-position:center top!important;
     background-repeat:no-repeat!important;
