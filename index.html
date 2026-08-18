@@ -11,6 +11,20 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Mobile home hero refinement only */
+    @media (max-width: 850px) {
+      body.home-dark .hero-home-dark .hero-media {
+        background-image:
+          linear-gradient(90deg,rgba(0,0,0,.68) 0%,rgba(0,0,0,.45) 45%,rgba(0,0,0,.26) 72%,rgba(0,0,0,0) 100%),
+          url('assets/bawadir-hero-final.png') !important;
+      }
+    }
+
+    body.home-dark .hero-home-dark h1 span {
+      color: #ffa300;
+    }
+  </style>
 </head>
 <body class="home-dark">
   <header class="site-header" id="site-header">
