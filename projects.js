@@ -4,7 +4,32 @@ const completed = [
 const ongoing = [
 'DIYAR AL MUHARRAQ -NORTH ISLAND INTERIM ACCESS INFRASTRUCTURE PROJECT-ROAD WORK','AL SIDRA SECONDARY INFRASTRUCTURE PROJECT','ARAD VILLA 1037 MUNICIPALITY MAINTANANCE WORK','ETD 400 KV RIFFA - PRECAST BEAM WORK','SAFRIYA PALACE PAVING MAINTANANCE WORK','DIYAR AL MUHARRAQ -NORTH ISLAND INTERIM ACCESS @INFRASTRUCTURE PROJECT - OUT FALL CONSTRUCTION WORK'
 ];
+
+// Original project photos already present in the repository are retained first.
 const images = ['img-095.jpg','img-031.jpg','img-084.jpg','img-101.jpg','img-071.jpg','img-046.jpg','img-047.jpg','img-058.jpg','img-020.jpg','img-100.jpg','img-073.jpg','img-025.jpg'];
+
+// Representative stock imagery for portfolio entries without an original photo.
+// These are deliberately described as representative visuals, not photographs of
+// the named projects. Sources are free-to-use Pexels images.
+const fallbackImages = {
+  building: 'https://images.pexels.com/photos/31579486/pexels-photo-31579486.jpeg?auto=compress&cs=tinysrgb&w=1200',
+  crane: 'https://images.pexels.com/photos/9370034/pexels-photo-9370034.jpeg?auto=compress&cs=tinysrgb&w=1200',
+  road: 'https://images.pexels.com/photos/34338597/pexels-photo-34338597.jpeg?auto=compress&cs=tinysrgb&w=1200',
+  construction: 'https://images.pexels.com/photos/5505119/pexels-photo-5505119.jpeg?auto=compress&cs=tinysrgb&w=1200',
+  residential: 'https://images.pexels.com/photos/8840842/pexels-photo-8840842.jpeg?auto=compress&cs=tinysrgb&w=1200'
+};
+
+function fallbackForProject(name, index) {
+  const n = name.toLowerCase();
+  if (/road|paving|asphalt|junction|parking|footpath|interlock|ring road|surface/.test(n)) return fallbackImages.road;
+  if (/villa|housing|apartments|residential|palace/.test(n)) return fallbackImages.residential;
+  if (/school|university|hotel|restaurant|kitchen/.test(n)) return fallbackImages.building;
+  if (/sewerage|drainage|irrigation|water|outfall|agriculture line/.test(n)) return fallbackImages.construction;
+  if (/infrastructure|foundation|tank|silo|400 kv|transmission|terminal|development/.test(n)) return fallbackImages.crane;
+  if (/fence|wall|bollard|cabin|security/.test(n)) return fallbackImages.construction;
+  return index % 2 ? fallbackImages.building : fallbackImages.construction;
+}
+
 const gallery = document.getElementById('projectGallery');
 function render(filter='all') {
   if (!gallery) return;
@@ -12,7 +37,24 @@ function render(filter='all') {
     ...completed.map((name,i)=>({name,status:'completed',num:i+1})),
     ...ongoing.map((name,i)=>({name,status:'ongoing',num:i+1}))
   ].filter(x => filter==='all' || x.status===filter);
-  gallery.innerHTML = items.map((item,i)=>`<article class="project-card"><div class="project-image">${i < images.length ? `<img src="assets/projects/${images[i % images.length]}" alt="Construction portfolio image">` : '<div class="image-placeholder">BAWADIR<br>PROJECT PORTFOLIO</div>'}<span>${item.status === 'ongoing' ? 'Ongoing' : 'Completed'}</span></div><div class="project-info"><small>${item.status === 'ongoing' ? 'Ongoing project' : 'Portfolio project'}</small><h3>${item.name}</h3></div></article>`).join('');
+
+  gallery.innerHTML = items.map((item,i)=> {
+    const localImage = i < images.length ? `assets/projects/${images[i % images.length]}` : '';
+    const fallback = fallbackForProject(item.name, i);
+    const image = localImage
+      ? `<img src="${localImage}" data-fallback="${fallback}" alt="Representative construction portfolio image">`
+      : `<img src="${fallback}" alt="Representative construction portfolio image">`;
+    return `<article class="project-card"><div class="project-image">${image}<span>${item.status === 'ongoing' ? 'Ongoing' : 'Completed'}</span></div><div class="project-info"><small>${item.status === 'ongoing' ? 'Ongoing project' : 'Portfolio project'}</small><h3>${item.name}</h3></div></article>`;
+  }).join('');
+
+  gallery.querySelectorAll('img[data-fallback]').forEach(img => {
+    img.addEventListener('error', () => {
+      if (img.dataset.fallbackApplied) return;
+      img.dataset.fallbackApplied = 'true';
+      img.src = img.dataset.fallback;
+    }, {once:true});
+  });
 }
+
 document.querySelectorAll('.filter').forEach(btn => btn.addEventListener('click', () => {document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render(btn.dataset.filter);}));
 render();
